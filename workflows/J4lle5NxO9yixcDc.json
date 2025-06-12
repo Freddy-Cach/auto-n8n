@@ -1,35 +1,51 @@
 {
-  "workflows": [
+  "name": "My workflow",
+  "nodes": [
     {
-      "createdAt": "2025-06-12T02:31:24.109Z",
-      "updatedAt": "2025-06-12T02:31:24.109Z",
-      "id": "J4lle5NxO9yixcDc",
-      "name": "My workflow",
-      "active": false,
-      "isArchived": false,
-      "nodes": [
-        {
-          "parameters": {},
-          "type": "n8n-nodes-base.manualTrigger",
-          "typeVersion": 1,
-          "position": [
-            0,
-            0
-          ],
-          "id": "ce58483e-400b-467d-9328-9377cd17812e",
-          "name": "When clicking ‘Execute workflow’"
-        }
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
       ],
-      "connections": {},
-      "settings": {
-        "executionOrder": "v1"
-      },
-      "staticData": null,
-      "meta": null,
-      "pinData": {},
-      "versionId": "87e048bf-5bd1-41b5-80e2-e00bc00e2733",
-      "triggerCount": 0,
-      "tags": []
+      "id": "ce58483e-400b-467d-9328-9377cd17812e",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        220,
+        0
+      ],
+      "id": "800ec67a-cda8-43dd-9692-2c7d99632113",
+      "name": "No Operation, do nothing"
     }
-  ]
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "8f217de7-29cd-4a87-b1eb-31e0b762f8b4",
+  "meta": {
+    "instanceId": "3e66a78478c63a801962b156fc2057e1418f2909a9a1cb1b1b6b6109211a5a17"
+  },
+  "id": "J4lle5NxO9yixcDc",
+  "tags": []
 }
