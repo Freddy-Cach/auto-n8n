@@ -29,3 +29,14 @@ services:
 
 ![Health check](./images/healthz.png)
 
+## Acceso a la UI de n8n
+
+1. Abre tu navegador en:
+   http://localhost:5678
+
+2. Inicia sesión con las credenciales definidas en tu `.env`:
+   - **Usuario**: `freddy-cach`
+   - **Contraseña**: la que elegiste en `N8N_BASIC_AUTH_PASSWORD`
+
+3. Tras el login verás el dashboard de **Overview** con tus workflows.
+
