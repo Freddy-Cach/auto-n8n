@@ -11,10 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-    - name: Ensure n8n_data exists & is writable
-      run: |
-        mkdir -p ${{ github.workspace }}/n8n_data
-        sudo chown -R 1000:1000 ${{ github.workspace }}/n8n_data
+
+      - name: Ensure n8n_data exists & is writable
+        run: |
+          mkdir -p ${{ github.workspace }}/n8n_data
+          sudo chown -R 1000:1000 ${{ github.workspace }}/n8n_data
 
       - name: Import all workflows via n8n CLI
         run: |
