@@ -1,6 +1,8 @@
 {
   "id": "UX_Starter_001",
   "name": "UX_Starter_Workflow_001",
+  "active": false,
+  "isArchived": false,
   "nodes": [
     {
       "parameters": {},
