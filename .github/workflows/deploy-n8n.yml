@@ -1,0 +1,20 @@
+name: Deploy n8n Workflows
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy-n8n:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Importar Workflows a n8n
+        run: |
+          docker run --rm \
+            -v ${{ github.workspace }}/workflows:/workflows \
+            -e N8N_HOST=${{ secrets.N8N_HOST }} \
+            -e N8N_AUTH_TOKEN=${{ secrets.N8N_AUTH_TOKEN }} \
+            n8nio/n8n:latest import:workflow --separate
