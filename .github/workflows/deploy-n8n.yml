@@ -19,15 +19,17 @@ jobs:
 
       - name: Import all workflows via n8n CLI
         run: |
-          find ${{ github.workspace }}/workflows -type f -name '*.json' | while read file; do
-            echo "Importing $file"
+          find "${{ github.workspace }}/workflows" -type f -name '*.json' | while read hostpath; do
+            # extraer ruta relativa a workflows/
+            relpath=${hostpath#${{ github.workspace }}/workflows/}
+            echo "Importing $relpath"
             docker run --rm \
-              -v ${{ github.workspace }}/n8n_data:/home/node/.n8n \
               -v ${{ github.workspace }}/workflows:/workflows \
+              -v ${{ github.workspace }}/n8n_data:/home/node/.n8n \
               -e N8N_HOST=${{ secrets.N8N_HOST }} \
               -e N8N_AUTH_TOKEN=${{ secrets.N8N_AUTH_TOKEN }} \
-              -e N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true \
               -e N8N_RUNNERS_ENABLED=true \
+              -e N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true \
               n8nio/n8n:latest \
-              import:workflow --input="$file"
+              import:workflow --input=/workflows/"$relpath"
           done
