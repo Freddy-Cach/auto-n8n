@@ -1,0 +1,38 @@
+{
+  "id": "UX_Starter_001",
+  "name": "UX_Starter_Workflow_001",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [100, 150],
+      "id": "node_manual_001",
+      "name": "UX_Starter_Workflow_001_ManualTrigger"
+    },
+    {
+      "parameters": {
+        "channel": "#general",
+        "text": "✅ Workflow UX_Starter_Workflow_001 executed successfully"
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 1,
+      "position": [400, 150],
+      "id": "node_notify_success_001",
+      "name": "UX_Starter_Workflow_001_NotifySuccess"
+    }
+  ],
+  "connections": {
+    "node_manual_001": {
+      "main": [
+        [
+          {
+            "node": "node_notify_success_001",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
