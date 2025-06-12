@@ -45,7 +45,9 @@
             "index": 0
           }
         ]
-      ],
+      ]
+    },
+    "node_notify_success_001": {
       "error": [
         [
           {
