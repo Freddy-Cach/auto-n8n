@@ -17,4 +17,4 @@ jobs:
             -v ${{ github.workspace }}/workflows:/workflows \
             -e N8N_HOST=${{ secrets.N8N_HOST }} \
             -e N8N_AUTH_TOKEN=${{ secrets.N8N_AUTH_TOKEN }} \
-            n8nio/n8n:latest import:workflow --separate
+            n8nio/n8n:latest import:workflow --separate --input=/workflows
