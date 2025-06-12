@@ -17,14 +17,17 @@ jobs:
           mkdir -p ${{ github.workspace }}/n8n_data
           sudo chown -R 1000:1000 ${{ github.workspace }}/n8n_data
 
-      - name: Import exported workflow via n8n CLI
+      - name: Import all workflows via n8n CLI
         run: |
-          docker run --rm \
-            -v ${{ github.workspace }}/n8n_data:/home/node/.n8n \
-            -v ${{ github.workspace }}/workflows:/workflows \
-            -e N8N_HOST=${{ secrets.N8N_HOST }} \
-            -e N8N_AUTH_TOKEN=${{ secrets.N8N_AUTH_TOKEN }} \
-            -e N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true \
-            -e N8N_RUNNERS_ENABLED=true \
-            n8nio/n8n:latest \
-            import:workflow --input=/workflows/J4lle5NxO9yixcDc.json
+          find ${{ github.workspace }}/workflows -type f -name '*.json' | while read file; do
+            echo "Importing $file"
+            docker run --rm \
+              -v ${{ github.workspace }}/n8n_data:/home/node/.n8n \
+              -v ${{ github.workspace }}/workflows:/workflows \
+              -e N8N_HOST=${{ secrets.N8N_HOST }} \
+              -e N8N_AUTH_TOKEN=${{ secrets.N8N_AUTH_TOKEN }} \
+              -e N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true \
+              -e N8N_RUNNERS_ENABLED=true \
+              n8nio/n8n:latest \
+              import:workflow --input="$file"
+          done
