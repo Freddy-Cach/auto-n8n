@@ -1,5 +1,5 @@
 {
-  "id": "UX_Starter_001",
+  "id": "UX_Starter_Workflow_001",
   "name": "UX_Starter_Workflow_001",
   "active": false,
   "isArchived": false,
@@ -22,6 +22,17 @@
       "position": [400, 150],
       "id": "node_notify_success_001",
       "name": "UX_Starter_Workflow_001_NotifySuccess"
+    },
+    {
+      "parameters": {
+        "channel": "#general",
+        "text": "❌ Workflow UX_Starter_Workflow_001 failed: {{$json[\"errorMessage\"]}}"
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 1,
+      "position": [400, 300],
+      "id": "node_notify_error_001",
+      "name": "UX_Starter_Workflow_001_NotifyError"
     }
   ],
   "connections": {
@@ -30,6 +41,15 @@
         [
           {
             "node": "node_notify_success_001",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ],
+      "error": [
+        [
+          {
+            "node": "node_notify_error_001",
             "type": "main",
             "index": 0
           }
