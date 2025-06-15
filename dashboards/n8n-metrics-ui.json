@@ -1,0 +1,63 @@
+{
+  "id": null,
+  "uid": "n8n-metrics",
+  "title": "n8n Metrics",
+  "schemaVersion": 36,
+  "version": 1,
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "Latencia de ejecución de workflows",
+      "datasource": { "type": "loki", "uid": "feov571mfyn0gc" },
+      "targets": [
+        {
+          "expr": "{job=\"n8n\"} |= \"Execution time\" | unwrap duration_ms",
+          "legendFormat": "{{workflowName}}",
+          "refId": "A"
+        }
+      ],
+      "gridPos": {
+        "x": 0,
+        "y": 0,
+        "w": 12,
+        "h": 8
+      }
+    },
+    {
+      "type": "stat",
+      "title": "Tasa éxito vs error (%)",
+      "datasource": { "type": "loki", "uid": "feov571mfyn0gc" },
+      "targets": [
+        {
+          "expr": "100 * (sum(rate({job=\"n8n\"} |= \"Workflow succeeded\" [5m])) / sum(rate({job=\"n8n\"} |= \"Workflow\" [5m])))",
+          "legendFormat": "Success %",
+          "refId": "B"
+        }
+      ],
+      "gridPos": {
+        "x": 12,
+        "y": 0,
+        "w": 6,
+        "h": 4
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Throughput de ejecuciones (exec/min)",
+      "datasource": { "type": "loki", "uid": "feov571mfyn0gc" },
+      "targets": [
+        {
+          "expr": "sum by(workflowName)(rate({job=\"n8n\"} |= \"Workflow started\" [1m]))",
+          "legendFormat": "{{workflowName}}",
+          "refId": "C"
+        }
+      ],
+      "gridPos": {
+        "x": 12,
+        "y": 4,
+        "w": 6,
+        "h": 4
+      }
+    }
+  ]
+}
